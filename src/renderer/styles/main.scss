@@ -1,0 +1,428 @@
+// Variables
+$primary-color: #e10600;
+$secondary-color: #333;
+$background-color: #1a1a1a;
+$card-background: #2a2a2a;
+$text-color: #fff;
+$text-muted: #999;
+$border-color: #444;
+$success-color: #00d084;
+$danger-color: #ff4444;
+
+// Mixins
+@mixin card {
+  background: $card-background;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+@mixin button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// Reset and base styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: $background-color;
+  color: $text-color;
+  overflow: hidden;
+}
+
+#app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+// Header
+.app-header {
+  background: $secondary-color;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 3px solid $primary-color;
+
+  h1 {
+    font-size: 24px;
+    color: $primary-color;
+  }
+
+  .header-actions {
+    display: flex;
+    gap: 10px;
+  }
+}
+
+// Main content
+.app-main {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+// Screens
+.screen {
+  display: none;
+  height: 100%;
+  padding: 30px;
+  overflow-y: auto;
+
+  &.active {
+    display: block;
+  }
+}
+
+// Buttons
+.btn {
+  @include button;
+
+  &.btn-primary {
+    background: $primary-color;
+    color: $text-color;
+
+    &:hover {
+      background: darken($primary-color, 10%);
+    }
+  }
+
+  &.btn-secondary {
+    background: $card-background;
+    color: $text-color;
+    border: 1px solid $border-color;
+
+    &:hover {
+      background: lighten($card-background, 5%);
+    }
+  }
+
+  &.btn-danger {
+    background: $danger-color;
+    color: $text-color;
+
+    &:hover {
+      background: darken($danger-color, 10%);
+    }
+  }
+
+  &.btn-small {
+    padding: 5px 15px;
+    font-size: 12px;
+  }
+}
+
+// Save Screen
+.save-list-container {
+  max-width: 800px;
+  margin: 0 auto;
+
+  h2 {
+    margin-bottom: 20px;
+    color: $primary-color;
+  }
+}
+
+.save-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  .no-saves {
+    text-align: center;
+    color: $text-muted;
+    padding: 40px;
+  }
+}
+
+.save-item {
+  @include card;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .save-info {
+    h3 {
+      margin-bottom: 8px;
+      color: $primary-color;
+    }
+
+    p {
+      font-size: 14px;
+      color: $text-muted;
+      margin-bottom: 4px;
+    }
+
+    .save-date {
+      font-size: 12px;
+      margin-top: 8px;
+    }
+  }
+
+  .save-actions {
+    display: flex;
+    gap: 10px;
+  }
+}
+
+// New Game Form
+.new-game-form {
+  max-width: 500px;
+  margin: 0 auto;
+  @include card;
+
+  h2 {
+    margin-bottom: 20px;
+    color: $primary-color;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      background: $background-color;
+      border: 1px solid $border-color;
+      border-radius: 4px;
+      color: $text-color;
+      font-size: 14px;
+
+      &:focus {
+        outline: none;
+        border-color: $primary-color;
+      }
+    }
+  }
+
+  .form-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+  }
+}
+
+// Game Screen
+.game-container {
+  display: flex;
+  height: 100%;
+}
+
+.sidebar {
+  width: 200px;
+  background: $secondary-color;
+  border-right: 1px solid $border-color;
+  padding: 20px 0;
+
+  .game-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .nav-btn {
+    padding: 15px 20px;
+    background: none;
+    border: none;
+    color: $text-color;
+    text-align: left;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    &.active {
+      background: $primary-color;
+      border-left: 3px solid $text-color;
+    }
+  }
+}
+
+.content {
+  flex: 1;
+  padding: 30px;
+  overflow-y: auto;
+
+  .view {
+    display: none;
+
+    &.active {
+      display: block;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: $primary-color;
+    }
+  }
+}
+
+// Dashboard
+.dashboard-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.stat-card {
+  @include card;
+
+  h3 {
+    font-size: 14px;
+    color: $text-muted;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+
+  .stat-value {
+    font-size: 32px;
+    font-weight: bold;
+    color: $primary-color;
+  }
+}
+
+// Team Management
+.teams-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.team-card {
+  @include card;
+
+  h3 {
+    color: $primary-color;
+    margin-bottom: 10px;
+  }
+
+  p {
+    margin-bottom: 8px;
+    color: $text-muted;
+  }
+
+  h4 {
+    margin: 15px 0 10px;
+    color: $text-color;
+  }
+
+  ul {
+    list-style: none;
+
+    li {
+      padding: 5px 0;
+      color: $text-color;
+    }
+  }
+}
+
+// Settings
+.settings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 600px;
+}
+
+.setting-item {
+  @include card;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  label {
+    flex: 1;
+    font-weight: 600;
+  }
+
+  input {
+    width: 150px;
+    padding: 8px;
+    background: $background-color;
+    border: 1px solid $border-color;
+    border-radius: 4px;
+    color: $text-color;
+
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+    }
+  }
+}
+
+// Race Results
+.results-table {
+  width: 100%;
+  @include card;
+  border-collapse: collapse;
+
+  thead {
+    background: $secondary-color;
+
+    th {
+      padding: 12px;
+      text-align: left;
+      font-weight: 600;
+      border-bottom: 2px solid $border-color;
+    }
+  }
+
+  tbody {
+    tr {
+      border-bottom: 1px solid $border-color;
+
+      &.dnf {
+        opacity: 0.6;
+      }
+
+      td {
+        padding: 12px;
+      }
+    }
+  }
+}
+
+.incidents-list {
+  @include card;
+  margin-top: 20px;
+  list-style: none;
+
+  li {
+    padding: 8px 0;
+    border-bottom: 1px solid $border-color;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
