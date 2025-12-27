@@ -8,8 +8,7 @@ dist/
 release/
 *.log
 
-# Database files
-*.db
+# Database files - exclude save databases but keep template
 *.db-shm
 *.db-wal
 

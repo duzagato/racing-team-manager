@@ -129,7 +129,7 @@ export class DatabaseManager {
     if (!this.db) throw new Error('Database not loaded');
     
     const insertStmt = this.db.prepare(`
-      INSERT INTO race_results (race_id, driver_id, position, points, points, time, dnf)
+      INSERT INTO race_results (race_id, driver_id, position, points, time, dnf)
       VALUES (?, ?, ?, ?, ?, ?)
     `);
     

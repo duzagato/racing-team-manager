@@ -83,13 +83,11 @@ racing-team-manager/
 ### Installation
 
 ```bash
+# Install dependencies
 npm install
-```
 
-### Initialize Template Database
-
-```bash
-node src/main/database/initDatabase.js
+# Initialize the template database
+npm run init:db
 ```
 
 ### Development

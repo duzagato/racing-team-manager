@@ -9,7 +9,7 @@ const __dirname = path.dirname(__filename);
  * Initialize the template database with schema and default data
  */
 function initializeDatabase() {
-  const dbPath = path.join(__dirname, '../../resources/database/template.db');
+  const dbPath = path.join(process.cwd(), 'resources/database/template.db');
   const db = new Database(dbPath);
 
   // Enable foreign keys
