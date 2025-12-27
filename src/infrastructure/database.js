@@ -24,7 +24,9 @@ export function initializeDatabase() {
   console.log('Initializing database at:', dbPath);
 
   // Create database connection
-  db = new Database(dbPath, { verbose: console.log });
+  // verbose logging is disabled in production for performance
+  const options = process.env.NODE_ENV === 'development' ? { verbose: console.log } : {};
+  db = new Database(dbPath, options);
 
   // Enable foreign keys
   db.pragma('foreign_keys = ON');

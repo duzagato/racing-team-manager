@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (window.api) {
       window.api.send('new-game', {});
     }
-    // TODO: Navigate to new game screen
+    // TODO: Replace alert with custom modal when game screens are implemented
     alert('Novo Jogo - Em desenvolvimento');
   });
 
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (window.api) {
       window.api.send('continue-game', {});
     }
-    // TODO: Navigate to continue game screen
+    // TODO: Replace alert with custom modal when game screens are implemented
     alert('Continuar - Em desenvolvimento');
   });
 
