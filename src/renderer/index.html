@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Racing Team Manager</title>
+  <link rel="stylesheet" href="./styles/main.scss">
+</head>
+<body>
+  <div id="app">
+    <header class="app-header">
+      <h1>Racing Team Manager</h1>
+      <div class="header-actions">
+        <button id="newGameBtn" class="btn btn-primary">New Game</button>
+        <button id="loadGameBtn" class="btn btn-secondary">Load Game</button>
+      </div>
+    </header>
+
+    <main class="app-main">
+      <!-- Save Selection Screen -->
+      <div id="saveScreen" class="screen active">
+        <div class="save-list-container">
+          <h2>Select a Save Game</h2>
+          <div id="saveList" class="save-list"></div>
+        </div>
+      </div>
+
+      <!-- New Game Screen -->
+      <div id="newGameScreen" class="screen">
+        <div class="new-game-form">
+          <h2>Create New Game</h2>
+          <form id="newGameForm">
+            <div class="form-group">
+              <label for="saveName">Save Name:</label>
+              <input type="text" id="saveName" required>
+            </div>
+            <div class="form-group">
+              <label for="playerName">Player Name:</label>
+              <input type="text" id="playerName" required>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">Create Game</button>
+              <button type="button" id="cancelNewGame" class="btn btn-secondary">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Game Screen -->
+      <div id="gameScreen" class="screen">
+        <div class="game-container">
+          <aside class="sidebar">
+            <nav class="game-nav">
+              <button class="nav-btn active" data-view="dashboard">Dashboard</button>
+              <button class="nav-btn" data-view="team">Team</button>
+              <button class="nav-btn" data-view="race">Race</button>
+              <button class="nav-btn" data-view="standings">Standings</button>
+              <button class="nav-btn" data-view="settings">Settings</button>
+            </nav>
+          </aside>
+
+          <section class="content">
+            <div id="dashboard" class="view active">
+              <h2>Dashboard</h2>
+              <div class="dashboard-stats">
+                <div class="stat-card">
+                  <h3>Current Season</h3>
+                  <p class="stat-value">Season 1</p>
+                </div>
+                <div class="stat-card">
+                  <h3>Team Budget</h3>
+                  <p class="stat-value">$100M</p>
+                </div>
+                <div class="stat-card">
+                  <h3>Championship Position</h3>
+                  <p class="stat-value">-</p>
+                </div>
+              </div>
+            </div>
+
+            <div id="team" class="view">
+              <h2>Team Management</h2>
+              <div id="teamInfo"></div>
+            </div>
+
+            <div id="race" class="view">
+              <h2>Race Simulation</h2>
+              <button id="simulateRaceBtn" class="btn btn-primary">Simulate Race</button>
+              <div id="raceResults"></div>
+            </div>
+
+            <div id="standings" class="view">
+              <h2>Championship Standings</h2>
+              <div id="standingsTable"></div>
+            </div>
+
+            <div id="settings" class="view">
+              <h2>Game Settings</h2>
+              <div id="settingsPanel"></div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>

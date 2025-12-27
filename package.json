@@ -1,0 +1,49 @@
+{
+  "name": "racing-team-manager",
+  "version": "1.0.0",
+  "description": "F1 Racing Team Management Game",
+  "main": "dist/main/main.js",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && electron-builder",
+    "build:main": "vite build --config vite.main.config.js",
+    "build:renderer": "vite build --config vite.renderer.config.js",
+    "preview": "vite preview",
+    "start": "electron .",
+    "lint": "eslint src --ext .js,.ts",
+    "format": "prettier --write \"src/**/*.{js,ts,json,scss}\""
+  },
+  "keywords": ["electron", "f1", "racing", "management", "game"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^24.9.1",
+    "vite": "^5.0.0",
+    "vite-plugin-electron": "^0.28.0",
+    "vite-plugin-electron-renderer": "^0.14.5",
+    "sass": "^1.69.5",
+    "javascript-obfuscator": "^4.1.0",
+    "eslint": "^8.55.0",
+    "prettier": "^3.1.1"
+  },
+  "dependencies": {
+    "better-sqlite3": "^9.2.2"
+  },
+  "build": {
+    "appId": "com.racing.teammanager",
+    "productName": "Racing Team Manager",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "resources/**/*"
+    ],
+    "asar": true,
+    "asarUnpack": [
+      "resources/database/template.db"
+    ]
+  }
+}
