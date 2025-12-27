@@ -2,16 +2,22 @@ import { defineConfig } from 'vite';
 import electron from 'vite-plugin-electron';
 import renderer from 'vite-plugin-electron-renderer';
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default defineConfig({
+  root: path.resolve(__dirname, 'src/application'),
+  base: './',
   plugins: [
     electron([
       {
-        // Main process entry file
-        entry: 'src/main.js',
+        // Main process entry file (relative to project root, not vite root)
+        entry: path.resolve(__dirname, 'src/main.js'),
         vite: {
           build: {
-            outDir: 'dist-electron',
+            outDir: path.resolve(__dirname, 'dist-electron'),
             rollupOptions: {
               external: ['electron', 'better-sqlite3']
             }
@@ -19,11 +25,11 @@ export default defineConfig({
         }
       },
       {
-        // Preload script
-        entry: 'src/preload.js',
+        // Preload script (relative to project root, not vite root)
+        entry: path.resolve(__dirname, 'src/preload.js'),
         vite: {
           build: {
-            outDir: 'dist-electron',
+            outDir: path.resolve(__dirname, 'dist-electron'),
             rollupOptions: {
               external: ['electron']
             }
@@ -37,10 +43,8 @@ export default defineConfig({
     ]),
     renderer()
   ],
-  root: 'src/application',
-  base: './',
   build: {
-    outDir: '../../dist',
+    outDir: path.resolve(__dirname, 'dist'),
     emptyOutDir: true
   },
   resolve: {
