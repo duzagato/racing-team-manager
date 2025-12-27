@@ -12,7 +12,7 @@ export class RaceSimulator {
    * Simulate a complete race
    */
   async simulateRace(raceConfig) {
-    const { raceId, weather = 'dry', trackId } = raceConfig;
+    const { raceId, weather = 'dry' } = raceConfig;
     
     // Get game settings for simulation parameters
     const settings = await this.db.getSettings();

@@ -2,40 +2,40 @@ import { defineConfig } from 'vite';
 import electron from 'vite-plugin-electron';
 import renderer from 'vite-plugin-electron-renderer';
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
+  root: 'src/renderer',
   plugins: [
     electron([
       {
         // Main process
-        entry: 'src/main/main.js',
+        entry: path.resolve(__dirname, 'src/main/main.js'),
         vite: {
           build: {
-            outDir: 'dist/main',
-            lib: {
-              entry: 'src/main/main.js',
-              formats: ['es'],
-              fileName: () => 'main.js'
-            },
+            outDir: path.resolve(__dirname, 'dist/main'),
+            emptyOutDir: true,
             rollupOptions: {
-              external: ['electron', 'better-sqlite3']
+              external: ['electron', 'better-sqlite3', 'fs', 'path']
             }
           }
         }
       },
       {
         // Preload script
-        entry: 'src/preload/preload.js',
+        entry: path.resolve(__dirname, 'src/preload/preload.js'),
         vite: {
           build: {
-            outDir: 'dist/preload',
-            lib: {
-              entry: 'src/preload/preload.js',
-              formats: ['cjs'],
-              fileName: () => 'preload.js'
-            },
+            outDir: path.resolve(__dirname, 'dist/preload'),
+            emptyOutDir: true,
             rollupOptions: {
-              external: ['electron']
+              external: ['electron'],
+              output: {
+                format: 'cjs',
+                entryFileNames: 'preload.cjs'
+              }
             }
           }
         }
@@ -43,18 +43,15 @@ export default defineConfig({
     ]),
     renderer()
   ],
+  base: './',
   build: {
-    outDir: 'dist/renderer',
-    rollupOptions: {
-      input: {
-        main: path.resolve(__dirname, 'src/renderer/index.html')
-      }
-    }
+    outDir: path.resolve(__dirname, 'dist/renderer'),
+    emptyOutDir: true
   },
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: ''
+        api: 'modern-compiler'
       }
     }
   },

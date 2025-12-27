@@ -1,5 +1,4 @@
 import Database from 'better-sqlite3';
-import path from 'path';
 
 /**
  * DatabaseManager - Implements the Repository/DAO pattern for SQLite access
