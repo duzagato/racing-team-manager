@@ -22,10 +22,31 @@ export class SaveManager {
   }
 
   /**
+   * Validate and sanitize save name to prevent path traversal attacks
+   */
+  validateSaveName(saveName) {
+    // Only allow alphanumeric characters, spaces, hyphens, and underscores
+    const sanitized = saveName.replace(/[^a-zA-Z0-9\s\-_]/g, '');
+    
+    // Prevent empty names or names that are just whitespace
+    if (!sanitized.trim()) {
+      throw new Error('Invalid save name');
+    }
+    
+    // Prevent directory traversal attempts
+    if (sanitized.includes('..') || sanitized.includes('/') || sanitized.includes('\\')) {
+      throw new Error('Invalid save name');
+    }
+    
+    return sanitized.trim();
+  }
+
+  /**
    * Get the path to a specific save
    */
   getSavePath(saveName) {
-    return path.join(this.savesDir, saveName);
+    const sanitized = this.validateSaveName(saveName);
+    return path.join(this.savesDir, sanitized);
   }
 
   /**
@@ -163,12 +184,13 @@ export class SaveManager {
    * Get the path to the template database
    */
   getTemplatePath() {
-    // In development
-    if (process.env.NODE_ENV === 'development') {
+    // In development or when NODE_ENV is not set to production
+    if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
       return path.join(process.cwd(), 'resources', 'database', 'template.db');
     }
     
     // In production (ASAR package)
+    // The database is unpacked from ASAR as configured in package.json
     return path.join(process.resourcesPath, 'database', 'template.db');
   }
 }

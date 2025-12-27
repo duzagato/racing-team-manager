@@ -18,10 +18,16 @@ export class DatabaseManager {
       this.db.close();
     }
     
-    this.db = new Database(dbPath, { 
-      verbose: console.log,
+    const options = { 
       fileMustExist: true 
-    });
+    };
+    
+    // Only enable verbose logging in development
+    if (process.env.NODE_ENV === 'development') {
+      options.verbose = console.log;
+    }
+    
+    this.db = new Database(dbPath, options);
     
     // Enable WAL mode for better concurrency
     this.db.pragma('journal_mode = WAL');
