@@ -1,6 +1,7 @@
 import './styles/main.scss';
+import { CareerMetadata, Team, Driver, Standing, RaceResult } from '../main/models/types';
 
-let currentCareer: any = null;
+let currentCareer: { metadata: CareerMetadata } | null = null;
 
 // Screen management
 function showScreen(screenId: string) {
@@ -95,7 +96,7 @@ async function createCareer() {
   }
 
   try {
-    const career = await window.api.career.create(name);
+    await window.api.career.create(name);
     nameInput.value = '';
     showScreen('career-select');
     loadCareersList();
@@ -143,7 +144,7 @@ async function refreshGameData() {
 }
 
 // Display standings
-function displayStandings(standings: any[], drivers: any[], teams: any[]) {
+function displayStandings(standings: Standing[], drivers: Driver[], teams: Team[]) {
   const container = document.getElementById('standings-table');
   if (!container) return;
 
@@ -183,7 +184,7 @@ function displayStandings(standings: any[], drivers: any[], teams: any[]) {
 }
 
 // Display teams
-function displayTeams(teams: any[]) {
+function displayTeams(teams: Team[]) {
   const container = document.getElementById('teams-table');
   if (!container) return;
 
@@ -221,7 +222,7 @@ function displayTeams(teams: any[]) {
 }
 
 // Display drivers
-function displayDrivers(drivers: any[], teams: any[]) {
+function displayDrivers(drivers: Driver[], teams: Team[]) {
   const container = document.getElementById('drivers-table');
   if (!container) return;
 
@@ -294,14 +295,14 @@ async function simulateRace() {
   if (!currentCareer) return;
 
   try {
-    const results = await window.api.simulation.race(currentCareer.metadata.id, 1);
+    const results = await window.api.simulation.race(currentCareer.metadata.id);
     
     // Display race results in events log
     const eventsLog = document.getElementById('events-log');
     if (eventsLog) {
       const raceEvent = document.createElement('p');
       raceEvent.className = 'event-item';
-      raceEvent.innerHTML = `<strong>Race Results:</strong><br>${results.slice(0, 10).map((r: any) => 
+      raceEvent.innerHTML = `<strong>Race Results:</strong><br>${results.slice(0, 10).map((r: RaceResult) => 
         `${r.position}. ${r.driverName} (${r.teamName}) - ${r.points} pts`
       ).join('<br>')}`;
       eventsLog.insertBefore(raceEvent, eventsLog.firstChild);

@@ -79,10 +79,10 @@ ipcMain.handle('simulation:advance', async (_, careerId: string) => {
   return simulationEngine?.advanceWeek(career);
 });
 
-ipcMain.handle('simulation:race', async (_, careerId: string, raceId: number) => {
+ipcMain.handle('simulation:race', async (_, careerId: string) => {
   const career = careerManager?.getActiveCareer(careerId);
   if (!career) throw new Error('Career not found');
-  return simulationEngine?.simulateRace(career, raceId);
+  return simulationEngine?.simulateRace(career);
 });
 
 // IPC Handlers for Data Access

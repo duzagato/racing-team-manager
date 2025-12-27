@@ -10,6 +10,10 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Compiled JavaScript from TypeScript
+src/**/*.js
+src/**/*.js.map
+
 # Editor directories and files
 .idea
 .vscode

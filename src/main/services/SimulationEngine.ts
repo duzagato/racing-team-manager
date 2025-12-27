@@ -27,7 +27,7 @@ export class SimulationEngine {
     };
   }
 
-  simulateRace(career: Career, _raceId: number): RaceResult[] {
+  simulateRace(career: Career): RaceResult[] {
     const drivers = career.driverRepository.getAll();
     const teams = career.teamRepository.getAll();
 

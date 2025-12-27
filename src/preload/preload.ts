@@ -1,4 +1,5 @@
 import { contextBridge, ipcRenderer } from 'electron';
+import { CareerMetadata, Team, Driver, Standing, Balance, RaceResult } from '../main/models/types';
 
 // Expose protected methods that allow the renderer process to use
 // the ipcRenderer without exposing the entire object
@@ -14,7 +15,7 @@ contextBridge.exposeInMainWorld('api', {
   // Simulation
   simulation: {
     advance: (careerId: string) => ipcRenderer.invoke('simulation:advance', careerId),
-    race: (careerId: string, raceId: number) => ipcRenderer.invoke('simulation:race', careerId, raceId),
+    race: (careerId: string) => ipcRenderer.invoke('simulation:race', careerId),
   },
 
   // Data Access
@@ -29,20 +30,20 @@ contextBridge.exposeInMainWorld('api', {
 // Type definitions for TypeScript
 export interface ElectronAPI {
   career: {
-    list: () => Promise<any[]>;
-    create: (name: string) => Promise<any>;
-    load: (careerId: string) => Promise<any>;
+    list: () => Promise<CareerMetadata[]>;
+    create: (name: string) => Promise<CareerMetadata>;
+    load: (careerId: string) => Promise<{ metadata: CareerMetadata }>;
     delete: (careerId: string) => Promise<boolean>;
   };
   simulation: {
-    advance: (careerId: string) => Promise<any>;
-    race: (careerId: string, raceId: number) => Promise<any>;
+    advance: (careerId: string) => Promise<{ week: number; events: string[] }>;
+    race: (careerId: string) => Promise<RaceResult[]>;
   };
   data: {
-    getTeams: (careerId: string) => Promise<any[]>;
-    getDrivers: (careerId: string) => Promise<any[]>;
-    getStandings: (careerId: string) => Promise<any[]>;
-    getBalance: (careerId: string) => Promise<any[]>;
+    getTeams: (careerId: string) => Promise<Team[]>;
+    getDrivers: (careerId: string) => Promise<Driver[]>;
+    getStandings: (careerId: string) => Promise<Standing[]>;
+    getBalance: (careerId: string) => Promise<Balance[]>;
   };
 }
 
