@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Racing Team Manager</title>
+  </head>
+  <body>
+    <div id="app">
+      <div class="container">
+        <header class="header">
+          <h1>🏎️ Racing Team Manager</h1>
+          <p class="subtitle">F1 Career Mode</p>
+        </header>
+
+        <!-- Career Selection Screen -->
+        <div id="career-select" class="screen active">
+          <div class="card">
+            <h2>Select Career</h2>
+            <button id="new-career-btn" class="btn btn-primary">New Career</button>
+            <div id="careers-list" class="careers-list"></div>
+          </div>
+        </div>
+
+        <!-- New Career Screen -->
+        <div id="new-career" class="screen">
+          <div class="card">
+            <h2>Create New Career</h2>
+            <div class="form-group">
+              <label for="career-name">Career Name:</label>
+              <input type="text" id="career-name" class="input" placeholder="Enter career name" />
+            </div>
+            <div class="button-group">
+              <button id="create-career-btn" class="btn btn-primary">Create</button>
+              <button id="cancel-career-btn" class="btn btn-secondary">Cancel</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Game Screen -->
+        <div id="game-screen" class="screen">
+          <div class="game-header">
+            <div class="career-info">
+              <h2 id="career-title">Career Name</h2>
+              <p id="career-stats">Season 1 - Week 1</p>
+            </div>
+            <button id="back-to-menu-btn" class="btn btn-secondary">Back to Menu</button>
+          </div>
+
+          <div class="tabs">
+            <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
+            <button class="tab-btn" data-tab="standings">Standings</button>
+            <button class="tab-btn" data-tab="teams">Teams</button>
+            <button class="tab-btn" data-tab="drivers">Drivers</button>
+          </div>
+
+          <!-- Dashboard Tab -->
+          <div id="dashboard-tab" class="tab-content active">
+            <div class="dashboard-grid">
+              <div class="card">
+                <h3>Quick Actions</h3>
+                <button id="advance-week-btn" class="btn btn-primary btn-block">Advance Week</button>
+                <button id="simulate-race-btn" class="btn btn-success btn-block">Simulate Next Race</button>
+              </div>
+              <div class="card">
+                <h3>Recent Events</h3>
+                <div id="events-log" class="events-log">
+                  <p class="event-item">Welcome to your new career!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Standings Tab -->
+          <div id="standings-tab" class="tab-content">
+            <div class="card">
+              <h3>Driver Standings</h3>
+              <div id="standings-table" class="table-container"></div>
+            </div>
+          </div>
+
+          <!-- Teams Tab -->
+          <div id="teams-tab" class="tab-content">
+            <div class="card">
+              <h3>Teams</h3>
+              <div id="teams-table" class="table-container"></div>
+            </div>
+          </div>
+
+          <!-- Drivers Tab -->
+          <div id="drivers-tab" class="tab-content">
+            <div class="card">
+              <h3>Drivers</h3>
+              <div id="drivers-table" class="table-container"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,44 @@
+// Primary colors
+$primary-color: #e10600;
+$secondary-color: #15151e;
+$accent-color: #ff6b00;
+$success-color: #00c851;
+$danger-color: #ff4444;
+$warning-color: #ffbb33;
+
+// Background colors
+$bg-primary: #0a0a0f;
+$bg-secondary: #15151e;
+$bg-card: #1e1e2d;
+$bg-hover: #252537;
+
+// Text colors
+$text-primary: #ffffff;
+$text-secondary: #a0a0b0;
+$text-muted: #6a6a7a;
+
+// Border colors
+$border-color: #2a2a3a;
+$border-hover: #3a3a4a;
+
+// Spacing
+$spacing-xs: 0.25rem;
+$spacing-sm: 0.5rem;
+$spacing-md: 1rem;
+$spacing-lg: 1.5rem;
+$spacing-xl: 2rem;
+
+// Border radius
+$border-radius-sm: 4px;
+$border-radius-md: 8px;
+$border-radius-lg: 12px;
+
+// Transitions
+$transition-fast: 0.15s ease;
+$transition-normal: 0.3s ease;
+$transition-slow: 0.5s ease;
+
+// Breakpoints
+$breakpoint-mobile: 768px;
+$breakpoint-tablet: 1024px;
+$breakpoint-desktop: 1280px;

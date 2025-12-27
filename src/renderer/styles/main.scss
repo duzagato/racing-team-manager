@@ -1,0 +1,354 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, $bg-primary 0%, $bg-secondary 100%);
+  color: $text-primary;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: $spacing-lg;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: $spacing-xl;
+  padding: $spacing-xl 0;
+  
+  h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, $primary-color, $accent-color);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: $spacing-sm;
+  }
+  
+  .subtitle {
+    color: $text-secondary;
+    font-size: 1.2rem;
+  }
+}
+
+.screen {
+  display: none;
+  animation: fadeIn $transition-normal;
+  
+  &.active {
+    display: block;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card {
+  background: $bg-card;
+  border-radius: $border-radius-lg;
+  padding: $spacing-xl;
+  margin-bottom: $spacing-lg;
+  border: 1px solid $border-color;
+  transition: border-color $transition-normal;
+  
+  &:hover {
+    border-color: $border-hover;
+  }
+  
+  h2, h3 {
+    margin-bottom: $spacing-lg;
+    color: $text-primary;
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+    border-bottom: 2px solid $primary-color;
+    padding-bottom: $spacing-sm;
+  }
+}
+
+.btn {
+  padding: $spacing-md $spacing-xl;
+  border: none;
+  border-radius: $border-radius-md;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all $transition-fast;
+  display: inline-block;
+  text-align: center;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, $primary-color, $accent-color);
+  color: $text-primary;
+}
+
+.btn-secondary {
+  background: $bg-secondary;
+  color: $text-primary;
+  border: 1px solid $border-color;
+}
+
+.btn-success {
+  background: $success-color;
+  color: $text-primary;
+}
+
+.btn-block {
+  width: 100%;
+  margin-bottom: $spacing-md;
+}
+
+.form-group {
+  margin-bottom: $spacing-lg;
+  
+  label {
+    display: block;
+    margin-bottom: $spacing-sm;
+    color: $text-secondary;
+    font-weight: 600;
+  }
+}
+
+.input {
+  width: 100%;
+  padding: $spacing-md;
+  background: $bg-secondary;
+  border: 1px solid $border-color;
+  border-radius: $border-radius-md;
+  color: $text-primary;
+  font-size: 1rem;
+  transition: border-color $transition-fast;
+  
+  &:focus {
+    outline: none;
+    border-color: $primary-color;
+  }
+}
+
+.button-group {
+  display: flex;
+  gap: $spacing-md;
+  margin-top: $spacing-lg;
+  
+  .btn {
+    flex: 1;
+  }
+}
+
+.careers-list {
+  margin-top: $spacing-lg;
+  display: grid;
+  gap: $spacing-md;
+}
+
+.career-item {
+  background: $bg-secondary;
+  padding: $spacing-lg;
+  border-radius: $border-radius-md;
+  border: 1px solid $border-color;
+  cursor: pointer;
+  transition: all $transition-fast;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  &:hover {
+    background: $bg-hover;
+    border-color: $primary-color;
+    transform: translateX(5px);
+  }
+  
+  .career-details {
+    h4 {
+      font-size: 1.2rem;
+      margin-bottom: $spacing-xs;
+    }
+    
+    p {
+      color: $text-muted;
+      font-size: 0.9rem;
+    }
+  }
+  
+  .career-actions {
+    display: flex;
+    gap: $spacing-sm;
+  }
+}
+
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $spacing-xl;
+  padding: $spacing-lg;
+  background: $bg-card;
+  border-radius: $border-radius-lg;
+  border: 1px solid $border-color;
+  
+  .career-info {
+    h2 {
+      margin-bottom: $spacing-xs;
+    }
+    
+    p {
+      color: $text-secondary;
+    }
+  }
+}
+
+.tabs {
+  display: flex;
+  gap: $spacing-sm;
+  margin-bottom: $spacing-lg;
+  border-bottom: 2px solid $border-color;
+  
+  .tab-btn {
+    padding: $spacing-md $spacing-xl;
+    background: transparent;
+    border: none;
+    color: $text-secondary;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all $transition-fast;
+    border-bottom: 3px solid transparent;
+    
+    &:hover {
+      color: $text-primary;
+      background: rgba(255, 255, 255, 0.05);
+    }
+    
+    &.active {
+      color: $primary-color;
+      border-bottom-color: $primary-color;
+    }
+  }
+}
+
+.tab-content {
+  display: none;
+  animation: fadeIn $transition-normal;
+  
+  &.active {
+    display: block;
+  }
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: $spacing-lg;
+}
+
+.events-log {
+  max-height: 400px;
+  overflow-y: auto;
+  
+  .event-item {
+    padding: $spacing-md;
+    background: $bg-secondary;
+    border-radius: $border-radius-sm;
+    margin-bottom: $spacing-sm;
+    color: $text-secondary;
+    border-left: 3px solid $primary-color;
+  }
+}
+
+.table-container {
+  overflow-x: auto;
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    
+    thead {
+      background: $bg-secondary;
+      
+      th {
+        padding: $spacing-md;
+        text-align: left;
+        font-weight: 600;
+        color: $text-secondary;
+        border-bottom: 2px solid $border-color;
+      }
+    }
+    
+    tbody {
+      tr {
+        border-bottom: 1px solid $border-color;
+        transition: background $transition-fast;
+        
+        &:hover {
+          background: $bg-hover;
+        }
+        
+        td {
+          padding: $spacing-md;
+          color: $text-primary;
+          
+          &.position {
+            font-weight: 700;
+            color: $primary-color;
+          }
+          
+          &.points {
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Scrollbar styling
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: $bg-secondary;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $border-color;
+  border-radius: $border-radius-sm;
+  
+  &:hover {
+    background: $border-hover;
+  }
+}
